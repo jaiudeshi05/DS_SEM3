@@ -45,6 +45,18 @@ void insertionAfterElementX(int n,int x){
     temp->next=newnode;
 }
 
+void insertionBeforeElementX(int n,int x){
+    struct node *newnode;
+    newnode=(struct node*)malloc(sizeof(struct node)); 
+    newnode->data=n;
+    struct node *temp=start;
+    while(temp->next->data!=x&&temp->next!=NULL){
+        temp=temp->next;
+    }
+    newnode->next=temp->next;
+    temp->next=newnode;
+}
+
 void insertionAfterPositionX(int n,int x){
     struct node *newnode;
     newnode=(struct node*)malloc(sizeof(struct node)); 
@@ -108,6 +120,14 @@ void deletionAfterPositionX(int x){
     temp->next=temp->next->next;
 }
 
+void deletionOfElementX(int x){
+    struct node *temp=start;
+    while(temp->next->data!=x&&temp->next!=NULL){
+        temp=temp->next;
+    }
+    temp->next=temp->next->next;
+}
+
 void display(){
     struct node *temp = start;
     if(temp == NULL){ //Boundary Condition(Not Compulsory To Be Written)
@@ -118,6 +138,27 @@ void display(){
         printf("%d ",temp->data);
         temp = temp->next;
     }
+}
+
+int len(){
+    int length=0;
+    struct node *temp = start;
+    while(temp != NULL){
+        length++;
+        temp = temp->next;
+    }
+    return length;
+}
+
+void average(){
+    int length=len();
+    int sum=0;
+    struct node *temp = start;
+    while(temp != NULL){
+        sum+=temp->data;
+        temp = temp->next;
+    }
+    printf("Average of linked list: %f",sum/length);
 }
 
 void main(){
